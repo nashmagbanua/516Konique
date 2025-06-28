@@ -1,110 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>516Konique PisoWiFi</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f8f9fa;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      color: #222;
-    }
-    header {
-      background: #16a34a;
-      color: white;
-      padding: 20px 10px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-    }
-    .container {
-  padding: 20px;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-    .voucher-box {
-      margin-top: 30px;
-      padding: 20px;
-      background: white;
-      border-radius: 10px;
-      max-width: 400px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
-    input[type="text"] {
-      width: 100%;
-      padding: 15px;
-      margin-top: 10px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
-    .btn {
-      background: #16a34a;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      margin-top: 15px;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .info {
-      margin-top: 40px;
-      font-size: 15px;
-      color: #333;
-    }
-    .info b {
-      color: #16a34a;
-    }
-    footer {
-      margin-top: 40px;
-      font-size: 14px;
-      color: #666;
-    }
-    a {
-      color: #16a34a;
-      text-decoration: none;
-    }
-    html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>516Konique PisoWiFi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #16a34a; /* A vibrant green */
+            --primary-dark: #128a3f; /* Slightly darker green for hover */
+            --text-color-dark: #222;
+            --text-color-medium: #555;
+            --text-color-light: #888;
+            --bg-light: #f8f9fa;
+            --box-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --shadow-light: rgba(0,0,0,0.08);
+            --shadow-medium: rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: var(--text-color-dark);
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* --- Header Styles --- */
+        header {
+            background: linear-gradient(to right, var(--primary-color), #21c75b); /* Subtle gradient */
+            color: white;
+            padding: 25px 15px;
+            box-shadow: 0 2px 8px var(--shadow-medium);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* Space between icon and text */
+        }
+
+        header h1 i {
+            font-size: 28px;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* --- Container Styles --- */
+        .container {
+            padding: 25px 20px;
+            max-width: 500px; /* Increased max-width for better look */
+            margin: 0 auto; /* Center the container */
+            box-sizing: border-box;
+        }
+
+        /* --- Voucher Box Styles --- */
+        .voucher-box {
+            margin-top: 35px;
+            padding: 30px;
+            background: var(--box-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--shadow-light); /* More prominent shadow */
+        }
+
+        .voucher-box h2 {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 30px); /* Adjust for padding */
+            padding: 15px;
+            margin-top: 10px;
+            font-size: 17px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2); /* Light green glow */
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            margin-top: 20px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: not-allowed; /* Indicate disabled state */
+            transition: background 0.3s ease, transform 0.2s ease;
+            font-weight: 600;
+            width: 100%; /* Make button full width */
+        }
+
+        .btn:hover:not([disabled]) {
+            background: var(--primary-dark);
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        .coming-soon-message {
+            margin-top: 15px;
+            color: var(--text-color-medium);
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-style: italic;
+        }
+
+        .coming-soon-message i {
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+
+        /* --- Info Section Styles --- */
+        .info {
+            margin-top: 45px;
+            font-size: 16px;
+            color: var(--text-color-dark);
+            background: var(--box-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px var(--shadow-light);
+            text-align: left; /* Align info text left */
+        }
+
+        .info p {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px; /* Space for potential icons in future */
+        }
+
+        .info p:last-child {
+            margin-bottom: 0;
+        }
+
+        .info b {
+            color: var(--primary-color);
+            font-weight: 700;
+            min-width: 80px; /* Align key terms */
+        }
+
+        .info a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .info a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        /* --- Footer Styles --- */
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 14px;
+            color: var(--text-color-medium);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 28px;
+            }
+
+            header h1 i {
+                font-size: 24px;
+            }
+
+            header p {
+                font-size: 15px;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            .voucher-box {
+                padding: 25px;
+            }
+
+            .voucher-box h2 {
+                font-size: 22px;
+            }
+
+            input[type="text"] {
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 17px;
+            }
+
+            .info {
+                padding: 20px;
+                font-size: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <h1>516Konique PisoWiFi</h1>
-  <p>Piso‑Koniqueted 4ever 💚</p>
-</header>
+    <header>
+        <h1><i class="fas fa-wifi"></i> 516Konique PisoWiFi</h1>
+        <p>Piso‑Koniqueted 4ever 💚</p>
+    </header>
 
-<div class="container">
-  <div class="voucher-box">
-    <h2>Enter Your Voucher Code</h2>
-    <input type="text" placeholder="Enter voucher code..." disabled>
-    <button class="btn" disabled>Connect</button>
-    <p style="margin-top: 10px; color: #888;">(Coming soon — demo only)</p>
-  </div>
+    <div class="container">
+        <div class="voucher-box">
+            <h2>Enter Your Voucher Code</h2>
+            <input type="text" placeholder="Enter voucher code..." disabled>
+            <button class="btn" disabled>Connect</button>
+            <p class="coming-soon-message"><i class="fas fa-check-circle"></i> This feature is coming soon — demo only!</p>
+        </div>
 
-  <div class="info">
-    <p><b>WiFi SSID:</b> 516koniqueTrial</p>
-    <p><b>GCash / Maya:</b> 0956 075 7315</p>
-    <p><b>Location:</b> Blk 5 Lot 16, Highland Residence,<br> San Vicente, Sto. Tomas, Batangas</p>
-    <p><b>Need help?</b> <a href="https://www.facebook.com/share/1Ghw44hCtu/?mibextid=wwXIfr" target="_blank">Message our Facebook Page</a></p>
-  </div>
-</div>
+        <div class="info">
+            <p><b>WiFi SSID:</b> 516koniqueTrial</p>
+            <p><b>GCash / Maya:</b> 0956 075 7315</p>
+            <p><b>Location:</b> Blk 5 Lot 16, Highland Residence,<br> San Vicente, Sto. Tomas, Batangas</p>
+            <p><b>Need help?</b> <a href="https://www.facebook.com/share/1Ghw44hCtu/?mibextid=wwXIfr" target="_blank">Message our Facebook Page</a></p>
+        </div>
+    </div>
 
-<footer>
-  &copy; 2025 516Konique | All rights reserved.
-</footer>
+    <footer>
+        &copy; 2025 516Konique | All rights reserved.
+    </footer>
 
 </body>
 </html>
