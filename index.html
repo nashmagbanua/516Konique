@@ -74,6 +74,7 @@
             background: var(--box-bg);
             border-radius: 12px;
             box-shadow: 0 4px 15px var(--shadow-light); /* More prominent shadow */
+            margin-bottom: 40px; /* Added space below voucher box */
         }
 
         .voucher-box h2 {
@@ -135,6 +136,217 @@
             font-size: 18px;
         }
 
+        /* --- How to Connect Section --- */
+        .how-to-connect-section {
+            margin-top: 45px;
+            background: var(--box-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--shadow-light);
+            text-align: left;
+            margin-bottom: 40px; /* Space below this section */
+        }
+
+        .how-to-connect-section h2 {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .how-to-connect-section ol {
+            list-style: none; /* Remove default numbering */
+            counter-reset: connect-step; /* Initialize counter */
+            padding: 0;
+            margin: 0;
+        }
+
+        .how-to-connect-section ol li {
+            counter-increment: connect-step; /* Increment counter */
+            position: relative;
+            padding-left: 40px; /* Space for the custom number */
+            margin-bottom: 18px;
+            font-size: 17px;
+            line-height: 1.5;
+            color: var(--text-color-dark);
+        }
+
+        .how-to-connect-section ol li::before {
+            content: counter(connect-step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--primary-color);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .how-to-connect-section ol li b {
+            color: var(--primary-dark);
+        }
+
+        /* --- Rates & Promos Section --- */
+        .rates-section {
+            margin-top: 45px;
+            background: var(--box-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--shadow-light);
+            text-align: left;
+            margin-bottom: 40px; /* Ensure space below this section */
+        }
+
+        .rates-section h2 {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .rates-section h3 {
+            font-size: 20px;
+            color: var(--text-color-dark);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        /* Table for Rates */
+        .rates-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 17px;
+        }
+
+        .rates-table th, .rates-table td {
+            padding: 12px 10px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .rates-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .rates-table tr:nth-child(even) {
+            background-color: #f6f6f6;
+        }
+
+        .rates-table td:first-child {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .data-policy {
+            background-color: #e6f7ed; /* Light green background */
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            margin-bottom: 25px;
+            color: var(--text-color-dark);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #c8e6d0;
+        }
+
+        .data-policy i {
+            color: var(--primary-color);
+            font-size: 22px;
+        }
+
+        /* Promos Section */
+        .promos-section {
+            background-color: #fff9e6; /* Light yellow background for promos */
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border: 1px solid #ffe8b3;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .promos-section h3 {
+            color: #d99000; /* A gold-like color for promo heading */
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: 700;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .promo-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .promo-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .promo-item p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: var(--text-color-dark);
+        }
+
+        .promo-item p b {
+            color: var(--primary-color);
+        }
+
+        .promo-item ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0;
+            font-size: 16px;
+        }
+
+        .promo-item ul li {
+            background-color: #fdf3d9;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #d99000;
+        }
+
+        .promo-item ul li i {
+            color: var(--primary-color);
+        }
+
+        .promo-contact {
+            margin-top: 15px;
+            font-style: italic;
+            color: var(--text-color-medium);
+            font-size: 15px;
+        }
+        .promo-contact b {
+            color: var(--primary-color);
+        }
+
+
         /* --- Info Section Styles --- */
         .info {
             margin-top: 45px;
@@ -145,35 +357,61 @@
             border-radius: 12px;
             box-shadow: 0 2px 10px var(--shadow-light);
             text-align: left; /* Align info text left */
+            display: flex; /* Use flexbox for QR codes */
+            flex-direction: column;
+            gap: 20px; /* Space between info items */
         }
 
         .info p {
-            margin-bottom: 12px;
+            margin-bottom: 0; /* Reset margin for flex items */
             display: flex;
             align-items: flex-start;
-            gap: 10px; /* Space for potential icons in future */
+            gap: 10px;
+        }
+        
+        .qr-codes-section {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
         }
 
-        .info p:last-child {
-            margin-bottom: 0;
-        }
-
-        .info b {
+        .qr-codes-section h3 {
+            font-size: 20px;
             color: var(--primary-color);
-            font-weight: 700;
-            min-width: 80px; /* Align key terms */
-        }
-
-        .info a {
-            color: var(--primary-color);
-            text-decoration: none;
+            margin-bottom: 15px;
             font-weight: 600;
-            transition: color 0.2s ease;
         }
 
-        .info a:hover {
-            color: var(--primary-dark);
-            text-decoration: underline;
+        .qr-codes-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px; /* Space between multiple QR codes */
+            flex-wrap: wrap; /* Allow QR codes to wrap on smaller screens */
+        }
+
+        .qr-code-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .qr-code-item img {
+            width: 120px; /* Adjusted size for two QR codes */
+            height: 120px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 5px;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .qr-code-item p {
+            margin-top: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-color-dark);
         }
 
         /* --- Footer Styles --- */
@@ -221,9 +459,69 @@
                 font-size: 17px;
             }
 
+            .how-to-connect-section {
+                padding: 20px;
+            }
+            .how-to-connect-section h2 {
+                font-size: 22px;
+            }
+            .how-to-connect-section ol li {
+                font-size: 16px;
+                padding-left: 35px;
+            }
+            .how-to-connect-section ol li::before {
+                width: 25px;
+                height: 25px;
+                font-size: 14px;
+            }
+
+            .rates-section {
+                padding: 20px;
+            }
+
+            .rates-section h2 {
+                font-size: 22px;
+            }
+            .rates-section h3 {
+                font-size: 18px;
+            }
+
+            .rates-table th, .rates-table td {
+                padding: 10px 5px;
+                font-size: 15px;
+            }
+
+            .data-policy {
+                font-size: 15px;
+                padding: 12px;
+            }
+
+            .promos-section {
+                padding: 15px;
+            }
+
+            .promos-section h3 {
+                font-size: 20px;
+            }
+            .promo-item p, .promo-item ul li {
+                font-size: 15px;
+            }
+            .promo-item ul li i {
+                font-size: 16px;
+            }
+
             .info {
                 padding: 20px;
                 font-size: 15px;
+            }
+
+            .qr-codes-container {
+                flex-direction: column; /* Stack QR codes vertically on small screens */
+                gap: 15px;
+            }
+            .qr-code-item img {
+                width: 100px;
+                height: 100px;
             }
         }
     </style>
@@ -243,17 +541,102 @@
             <p class="coming-soon-message"><i class="fas fa-check-circle"></i> This feature is coming soon — demo only!</p>
         </div>
 
+        ---
+
+        <div class="how-to-connect-section">
+            <h2><i class="fas fa-plug"></i> How to Connect</h2>
+            <ol>
+                <li>Connect to our WiFi Network: Find and select "<b style="color: var(--primary-color);">516koniqueTrial</b>" from your device's WiFi settings.</li>
+                <li>Access the Portal: This page should **automatically pop up** after connecting. If not, open your web browser (Chrome, Safari, etc.).</li>
+                <li>Enter Your Voucher Code: Type your valid voucher code into the box above.</li>
+                <li>Click "Connect": Enjoy fast and unlimited internet!</li>
+            </ol>
+        </div>
+
+        ---
+
+        <div class="rates-section">
+            <h2>💸 Rates & Promos</h2>
+
+            <h3>Time-based Rates</h3>
+            <table class="rates-table">
+                <thead>
+                    <tr>
+                        <th>Price</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>₱1</td>
+                        <td>12 minutes</td>
+                    </tr>
+                    <tr>
+                        <td>₱5</td>
+                        <td>1 hour</td>
+                    </tr>
+                    <tr>
+                        <td>₱10</td>
+                        <td>2 hours</td>
+                    </tr>
+                    <tr>
+                        <td>₱15</td>
+                        <td>3 hours</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Data Policy</h3>
+            <div class="data-policy">
+                <i class="fas fa-globe"></i>
+                <p>Enjoy **unlimited data access** during your active session.<br>No data caps, no restrictions — just pure internet!</p>
+            </div>
+
+            <div class="promos-section">
+                <h3><i class="fas fa-bullhorn"></i> Good News sa mga nagc-Cash In!</h3>
+                <div class="promo-item">
+                    <p>Pag nag **cash-in** ka sa GCash/Maya number namin:</p>
+                    <ul>
+                        <li><i class="fas fa-coins"></i> 💰 Below ₱1,000 = **30 mins FREE internet**</li>
+                        <li><i class="fas fa-sack-dollar"></i> 💰 ₱1,000 and up = **1 hour FREE internet**</li>
+                    </ul>
+                    <p class="promo-contact">Message us after cash-in para ma-activate ang bonus time mo!</p>
+                    <p class="promo-contact">➡️ GCash/Maya No.: <b>0956 075 7315</b></p>
+                </div>
+            </div>
+        </div>
+
+        ---
+
         <div class="info">
             <p><b>WiFi SSID:</b> 516koniqueTrial</p>
             <p><b>GCash / Maya:</b> 0956 075 7315</p>
             <p><b>Location:</b> Blk 5 Lot 16, Highland Residence,<br> San Vicente, Sto. Tomas, Batangas</p>
             <p><b>Need help?</b> <a href="https://www.facebook.com/share/1Ghw44hCtu/?mibextid=wwXIfr" target="_blank">Message our Facebook Page</a></p>
-        </div>
-    </div>
 
-    <footer>
-        &copy; 2025 516Konique | All rights reserved.
-    </footer>
+            <div class="qr-codes-section">
+                <h3>Scan to Pay (GCash & Maya InstaPay)</h3>
+                <div class="qr-codes-container">
+                    <div class="qr-code-item">
+                        <img src="gcash.jpeg" alt="GCash InstaPay QR Code">
+                        <p>GCash</p>
+                    </div>
+                    <div class="qr-code-item">
+                        <img src="maya.jpeg.png" alt="Maya InstaPay QR Code">
+                        <p>Maya</p>
+                    </div>
+                </div>
+                <p style="margin-top: 15px; font-size: 14px; color: var(--text-color-medium);">
+                    *Always verify the number <b>0956 075 7315</b> before completing your transaction.
+                </p>
+            </div>
+        </div>
+
+        ---
+
+        <footer>
+            &copy; 2025 516Konique | All rights reserved.
+        </footer>
 
 </body>
 </html>
