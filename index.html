@@ -1,814 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>516Konique PisoWiFi</title>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #16a34a; /* A vibrant green */
-            --primary-dark: #128a3f; /* Slightly darker green for hover */
-            --text-color-dark: #222;
-            --text-color-medium: #555;
-            --text-color-light: #888;
-            --bg-light: #f8f9fa;
-            --box-bg: #ffffff;
-            --border-color: #e0e0e0;
-            --shadow-light: rgba(0,0,0,0.08);
-            --shadow-medium: rgba(0,0,0,0.1);
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(to right bottom, #e0ffe0, #d0f0d0, #b0e0b0, #90d090, #70c070);
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            color: var(--text-color-dark);
-            line-height: 1.6;
-            overflow-x: hidden; /* Prevent horizontal scroll */
-            /* Add padding to the top of the body equal to header height + some margin */
-            padding-top: 100px; /* Adjust this value if header height changes */
-        }
-
-        /* --- Header Styles --- */
-        header {
-            background: linear-gradient(to right, var(--primary-color), #21c75b); /* Subtle gradient */
-            color: white;
-            padding: 25px 15px;
-            box-shadow: 0 2px 8px var(--shadow-medium);
-            /* Fixed header styles */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000; /* Ensures header stays on top */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            box-sizing: border-box; /* Include padding in width */
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 32px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px; /* Space between icon and text */
-        }
-
-        header h1 i {
-            font-size: 28px;
-        }
-
-        header p {
-            margin: 5px 0 0;
-            font-size: 16px;
-            opacity: 0.9;
-        }
-
-        /* Help icon in header */
-        .help-icon {
-            position: absolute;
-            top: 25px; /* Aligns with header content */
-            right: 20px;
-            font-size: 28px;
-            color: white;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .help-icon:hover {
-            transform: scale(1.1);
-        }
-
-        /* --- Modal Styles --- */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1001; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background-color: var(--box-bg);
-            margin: auto;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px var(--shadow-medium);
-            width: 90%; /* Responsive width */
-            max-width: 350px; /* Max width for larger screens */
-            text-align: center;
-            position: relative;
-        }
-
-        .modal-content h2 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 26px;
-            font-weight: 700;
-        }
-
-        .modal-content p {
-            font-size: 18px;
-            color: var(--text-color-dark);
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-
-        .modal-content p strong {
-            color: var(--primary-dark);
-        }
-
-        .modal-content a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .modal-content a:hover {
-            color: var(--primary-dark);
-            text-decoration: underline;
-        }
-
-        .modal-content .close-button {
-            color: var(--text-color-light);
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .modal-content .close-button:hover,
-        .modal-content .close-button:focus {
-            color: var(--primary-dark);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-
-        /* --- Container Styles --- */
-        .container {
-            padding: 25px 20px;
-            max-width: 500px; /* Increased max-width for better look */
-            margin: 0 auto; /* Center the container */
-            box-sizing: border-box;
-        }
-
-        /* --- Voucher Box Styles --- */
-        .voucher-box {
-            margin-top: 35px;
-            padding: 30px;
-            background: var(--box-bg);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px var(--shadow-light); /* More prominent shadow */
-            margin-bottom: 40px; /* Added space below voucher box */
-        }
-
-        .voucher-box h2 {
-            font-size: 24px;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        input[type="text"] {
-            width: calc(100% - 30px); /* Adjust for padding */
-            padding: 15px;
-            margin-top: 10px;
-            font-size: 17px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            box-sizing: border-box; /* Include padding in width */
-        }
-
-        input[type="text"]:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2); /* Light green glow */
-        }
-
-        .btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 14px 30px;
-            margin-top: 20px;
-            font-size: 18px;
-            border-radius: 8px;
-            cursor: not-allowed; /* Indicate disabled state */
-            transition: background 0.3s ease, transform 0.2s ease;
-            font-weight: 600;
-            width: 100%; /* Make button full width */
-        }
-
-        .btn:hover:not([disabled]) {
-            background: var(--primary-dark);
-            transform: translateY(-2px); /* Slight lift on hover */
-        }
-
-        .coming-soon-message {
-            margin-top: 15px;
-            color: var(--text-color-medium);
-            font-size: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            font-style: italic;
-        }
-
-        .coming-soon-message i {
-            color: var(--primary-color);
-            font-size: 18px;
-        }
-
-        /* --- How to Connect Section --- */
-        .how-to-connect-section {
-            margin-top: 45px;
-            background: var(--box-bg);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px var(--shadow-light);
-            text-align: left;
-            margin-bottom: 40px; /* Space below this section */
-        }
-
-        .how-to-connect-section h2 {
-            font-size: 24px;
-            color: var(--primary-color);
-            margin-bottom: 25px;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        .how-to-connect-section ol {
-            list-style: none; /* Remove default numbering */
-            counter-reset: connect-step; /* Initialize counter */
-            padding: 0;
-            margin: 0;
-        }
-
-        .how-to-connect-section ol li {
-            counter-increment: connect-step; /* Increment counter */
-            position: relative;
-            padding-left: 40px; /* Space for the custom number */
-            margin-bottom: 18px;
-            font-size: 17px;
-            line-height: 1.5;
-            color: var(--text-color-dark);
-        }
-
-        .how-to-connect-section ol li::before {
-            content: counter(connect-step);
-            position: absolute;
-            left: 0;
-            top: 0;
-            background: var(--primary-color);
-            color: white;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 16px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .how-to-connect-section ol li b {
-            color: var(--primary-dark);
-        }
-
-        /* --- Rates & Promos Section --- */
-        .rates-section {
-            margin-top: 45px;
-            background: var(--box-bg);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px var(--shadow-light);
-            text-align: left;
-            margin-bottom: 40px; /* Ensure space below this section */
-        }
-
-        .rates-section h2 {
-            font-size: 24px;
-            color: var(--primary-color);
-            margin-bottom: 25px;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        .rates-section h3 {
-            font-size: 20px;
-            color: var(--text-color-dark);
-            margin-top: 25px;
-            margin-bottom: 15px;
-            font-weight: 600;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
-        }
-
-        /* Table for Rates */
-        .rates-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            font-size: 17px;
-        }
-
-        .rates-table th, .rates-table td {
-            padding: 12px 10px;
-            border: 1px solid var(--border-color);
-            text-align: center;
-        }
-
-        .rates-table th {
-            background-color: var(--primary-color);
-            color: white;
-            font-weight: 600;
-            font-size: 18px;
-        }
-
-        .rates-table tr:nth-child(even) {
-            background-color: #f6f6f6;
-        }
-
-        .rates-table td:first-child {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .data-policy {
-            background-color: #e6f7ed; /* Light green background */
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            margin-bottom: 25px;
-            color: var(--text-color-dark);
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border: 1px solid #c8e6d0;
-        }
-
-        .data-policy i {
-            color: var(--primary-color);
-            font-size: 22px;
-        }
-
-        /* Promos Section */
-        .promos-section {
-            background-color: #fff9e6; /* Light yellow background for promos */
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 30px;
-            border: 1px solid #ffe8b3;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .promos-section h3 {
-            color: #d99000; /* A gold-like color for promo heading */
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 22px;
-            font-weight: 700;
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .promo-item {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px dashed var(--border-color);
-        }
-
-        .promo-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .promo-item p {
-            margin: 5px 0;
-            font-size: 16px;
-            color: var(--text-color-dark);
-        }
-
-        .promo-item p b {
-            color: var(--primary-color);
-        }
-
-        .promo-item ul {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0 0;
-            font-size: 16px;
-        }
-
-        .promo-item ul li {
-            background-color: #fdf3d9;
-            padding: 10px 15px;
-            border-radius: 6px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #d99000;
-        }
-
-        .promo-item ul li i {
-            color: var(--primary-color);
-        }
-
-        .promo-contact {
-            margin-top: 15px;
-            font-style: italic;
-            color: var(--text-color-medium);
-            font-size: 15px;
-        }
-        .promo-contact b {
-            color: var(--primary-color);
-        }
-
-
-        /* --- Info Section Styles --- */
-        .info {
-            margin-top: 45px;
-            font-size: 16px;
-            color: var(--text-color-dark);
-            background: var(--box-bg);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px var(--shadow-light);
-            text-align: left; /* Align info text left */
-            display: flex; /* Use flexbox for QR codes */
-            flex-direction: column;
-            gap: 20px; /* Space between info items */
-        }
-
-        .info p {
-            margin-bottom: 0; /* Reset margin for flex items */
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f9f0;
         }
         
-        .qr-codes-section {
-            text-align: center;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
+        .gradient-bg {
+            background: linear-gradient(135deg, #00b894 0%, #0984e3 100%);
         }
-
-        .qr-codes-section h3 {
-            font-size: 20px;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            font-weight: 600;
+        
+        .qr-code {
+            transition: transform 0.3s ease;
         }
-
-        .qr-codes-container {
-            display: flex;
-            justify-content: center;
-            gap: 25px; /* Space between multiple QR codes */
-            flex-wrap: wrap; /* Allow QR codes to wrap on smaller screens */
+        
+        .qr-code:hover {
+            transform: scale(1.05);
         }
-
-        .qr-code-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+        
+        .connect-btn {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
-        .qr-code-item img {
-            width: 120px; /* Adjusted size for two QR codes */
-            height: 120px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 5px;
-            background-color: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        
+        .connect-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
         }
-
-        .qr-code-item p {
-            margin-top: 10px;
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text-color-dark);
+        
+        .pricing-card {
+            transition: all 0.3s ease;
         }
-
-        /* --- Footer Styles --- */
-        footer {
-            margin-top: 50px;
-            padding: 20px;
-            font-size: 14px;
-            color: var(--text-color-medium);
-            border-top: 1px solid var(--border-color);
-        }
-
-        /* --- Responsive Adjustments --- */
-        @media (max-width: 600px) {
-            body {
-                padding-top: 90px; /* Adjust for smaller header height on mobile */
-            }
-            header {
-                padding: 20px 15px;
-            }
-            header h1 {
-                font-size: 28px;
-            }
-
-            header h1 i {
-                font-size: 24px;
-            }
-
-            header p {
-                font-size: 15px;
-            }
-
-            .help-icon {
-                top: 20px;
-                font-size: 24px;
-            }
-
-            .modal-content {
-                padding: 20px;
-                width: 95%;
-            }
-            .modal-content h2 {
-                font-size: 22px;
-            }
-            .modal-content p {
-                font-size: 16px;
-            }
-            .modal-content .close-button {
-                top: 10px;
-                right: 15px;
-                font-size: 24px;
-            }
-
-            .container {
-                padding: 20px 15px;
-            }
-
-            .voucher-box {
-                padding: 25px;
-            }
-
-            .voucher-box h2 {
-                font-size: 22px;
-            }
-
-            input[type="text"] {
-                padding: 12px;
-                font-size: 16px;
-            }
-
-            .btn {
-                padding: 12px 25px;
-                font-size: 17px;
-            }
-
-            .how-to-connect-section {
-                padding: 20px;
-            }
-            .how-to-connect-section h2 {
-                font-size: 22px;
-            }
-            .how-to-connect-section ol li {
-                font-size: 16px;
-                padding-left: 35px;
-            }
-            .how-to-connect-section ol li::before {
-                width: 25px;
-                height: 25px;
-                font-size: 14px;
-            }
-
-            .rates-section {
-                padding: 20px;
-            }
-
-            .rates-section h2 {
-                font-size: 22px;
-            }
-            .rates-section h3 {
-                font-size: 18px;
-            }
-
-            .rates-table th, .rates-table td {
-                padding: 10px 5px;
-                font-size: 15px;
-            }
-
-            .data-policy {
-                font-size: 15px;
-                padding: 12px;
-            }
-
-            .promos-section {
-                padding: 15px;
-            }
-
-            .promos-section h3 {
-                font-size: 20px;
-            }
-            .promo-item p, .promo-item ul li {
-                font-size: 15px;
-            }
-            .promo-item ul li i {
-                font-size: 16px;
-            }
-
-            .info {
-                padding: 20px;
-                font-size: 15px;
-            }
-
-            .qr-codes-container {
-                flex-direction: column; /* Stack QR codes vertically on small screens */
-                gap: 15px;
-            }
-            .qr-code-item img {
-                width: 100px;
-                height: 100px;
-            }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
-<body>
-
-    <header>
-        <h1><i class="fas fa-wifi"></i> 516Konique PisoWiFi</h1>
-        <p>Piso‑Koniqueted 4ever 💚</p>
-        <i class="fas fa-question-circle help-icon" id="helpIcon"></i>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-6 px-4 shadow-lg">
+        <div class="container mx-auto flex flex-col items-center">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2 text-center">516Konique PisoWiFi</h1>
+            <p class="text-lg md:text-xl font-medium">Piso-Koniqueted 4ever <span class="text-green-200">💚</span></p>
+        </div>
     </header>
 
-    <div class="container">
-        <div class="voucher-box">
-            <h2>Enter Your Voucher Code</h2>
-            <input type="text" placeholder="Enter voucher code..." disabled>
-            <button class="btn" disabled>Connect</button>
-            <p class="coming-soon-message"><i class="fas fa-check-circle"></i>Pls like and share the fbpage for 12hour free wifi voucher connection </p>
-        </div>
-
-        <hr>
-
-        <div class="how-to-connect-section">
-            <h2><i class="fas fa-plug"></i> How to Connect</h2>
-            <ol>
-                <li>Connect to our WiFi Network: Find and select "<b style="color: var(--primary-color);">516Konique PISOWIFI</b>" from your device's WiFi settings.</li>
-                <li>Access the Portal: This page should **automatically pop up** after connecting. If not, open your web browser (Chrome, Safari, etc.).</li>
-                <li>Enter Your Voucher Code: Type your valid voucher code into the box above.</li>
-                <li>Click "Connect": Enjoy fast and unlimited internet!</li>
-            </ol>
-        </div>
-
-        <hr>
-
-        <div class="rates-section">
-            <h2>💸 Rates & Promos</h2>
-
-            <h3>Time-based Rates</h3>
-            <table class="rates-table">
-                <thead>
-                    <tr>
-                        <th>Price</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>₱1</td>
-                        <td>12 minutes</td>
-                    </tr>
-                    <tr>
-                        <td>₱5</td>
-                        <td>1 hour</td>
-                    </tr>
-                    <tr>
-                        <td>₱10</td>
-                        <td>2 hours</td>
-                    </tr>
-                    <tr>
-                        <td>₱15</td>
-                        <td>3 hours</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3>Data Policy</h3>
-            <div class="data-policy">
-                <i class="fas fa-globe"></i>
-                <p>Enjoy **unlimited data access** during your active session.<br>No data caps, no restrictions — just pure internet!</p>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Voucher Input Section -->
+        <section class="max-w-2xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6 mb-10">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Enter Your Voucher Code</h2>
+            <div class="flex flex-col md:flex-row gap-4">
+                <input type="text" placeholder="Voucher Code" class="flex-grow px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                <button class="connect-btn bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2">
+                    <i class="fas fa-wifi"></i> Connect
+                </button>
             </div>
+            <p class="text-gray-600 mt-4 text-center text-sm">Pls like and share the fbpage for 12hour free wifi voucher connection</p>
+        </section>
 
-            <div class="promos-section">
-                <h3><i class="fas fa-bullhorn"></i> Good News sa mga nagc-Cash In!</h3>
-                <div class="promo-item">
-                    <p>Pag nag **cash-in** ka sa GCash/Maya number namin:</p>
-                    <ul>
-                        <li><i class="fas fa-coins"></i> 💰 Below ₱1,000 = **30 mins FREE internet**</li>
-                        <li><i class="fas fa-sack-dollar"></i> 💰 ₱1,000 and up = **1 hour FREE internet**</li>
-                    </ul>
-                    <p class="promo-contact">Message us after cash-in para ma-activate ang bonus time mo!</p>
-                    <p class="promo-contact">➡️ GCash/Maya No.: <b>0956 075 7315</b></p>
+        <!-- How to Connect Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">How to Connect</h2>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-wifi text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">1. Connect to WiFi</h3>
+                    <p class="text-gray-600">Find and select <span class="font-bold">"516Konique PISOWIFI"</span> from your device's WiFi settings.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-globe text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">2. Access Portal</h3>
+                    <p class="text-gray-600">This page should automatically pop up. If not, open your web browser.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-ticket-alt text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">3. Enter Code</h3>
+                    <p class="text-gray-600">Type your valid voucher code into the box above.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-rocket text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">4. Click Connect</h3>
+                    <p class="text-gray-600">Enjoy fast and unlimited internet!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rates & Promos Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center flex items-center justify-center gap-2">
+                <i class="fas fa-money-bill-wave text-green-600"></i> Rates & Promos
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Time-based Rates -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="gradient-bg px-6 py-4">
+                        <h3 class="text-xl font-bold text-white">Time-based Rates</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b">
+                                        <th class="text-left py-3 px-4 font-semibold text-gray-700">Price</th>
+                                        <th class="text-left py-3 px-4 font-semibold text-gray-700">Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b hover:bg-gray-50">
+                                        <td class="py-3 px-4">₱1</td>
+                                        <td class="py-3 px-4">12 minutes</td>
+                                    </tr>
+                                    <tr class="border-b hover:bg-gray-50">
+                                        <td class="py-3 px-4">₱5</td>
+                                        <td class="py-3 px-4">1 hour</td>
+                                    </tr>
+                                    <tr class="border-b hover:bg-gray-50">
+                                        <td class="py-3 px-4">₱10</td>
+                                        <td class="py-3 px-4">2 hours</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-3 px-4">₱15</td>
+                                        <td class="py-3 px-4">3 hours</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Data Policy -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="gradient-bg px-6 py-4">
+                        <h3 class="text-xl font-bold text-white">Data Policy</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-start mb-4">
+                            <i class="fas fa-infinity text-green-600 text-xl mt-1 mr-3"></i>
+                            <p class="text-gray-700">Enjoy <span class="font-bold">unlimited data access</span> during your active session. No data caps, no restrictions — just pure internet!</p>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <h4 class="font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-gift text-yellow-500 mr-2"></i> Good News sa mga nagc-Cash In!
+                            </h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>💰 Below ₱1,000 = <span class="font-bold">30 mins FREE internet</span></span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>💰 ₱1,000 and up = <span class="font-bold">1 hour FREE internet</span></span>
+                                </li>
+                            </ul>
+                            <p class="mt-4 text-gray-600">Message us after cash-in para ma-activate ang bonus time mo!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment & Contact Section -->
+        <section class="mb-12">
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- QR Codes -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6 text-center">Scan to Pay</h3>
+                    <div class="flex flex-col md:flex-row justify-center gap-8">
+                        <div class="qr-code bg-white p-4 rounded-lg shadow-sm text-center">
+                            <img src="images/gcash.png" alt="GCash QR Code" class="w-40 h-40 mx-auto mb-2">
+                            <p class="font-bold text-gray-700">GCash</p>
+                        </div>
+                        <div class="qr-code bg-white p-4 rounded-lg shadow-sm text-center">
+                            <img src="images/maya.png" alt="Maya QR Code" class="w-40 h-40 mx-auto mb-2">
+                            <p class="font-bold text-gray-700">Maya</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4 text-center">Always verify the number <span class="font-bold">0956 075 7315</span> before completing your transaction.</p>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6 text-center">Contact Information</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-wifi text-blue-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-sm">WiFi SSID</p>
+                                <p class="font-bold">516koniqueTrial</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-mobile-alt text-green-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-sm">GCash / Maya</p>
+                                <p class="font-bold">0956 075 7315</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-purple-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-sm">Location</p>
+                                <p class="font-bold">Blk 5 Lot 16, Highland Residence, San Vicente, Sto. Tomas, Batangas</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-question-circle text-red-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-sm">Need help?</p>
+                                <a href="https://www.facebook.com/share/1Ghw44hCtu/?mibextid=wwXIfr" class="font-bold text-blue-600 hover:underline">Message our Facebook Page</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-4">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">© 2025 516Konique | All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="tel:+639560757315" class="hover:text-green-300 flex items-center">
+                        <i class="fas fa-phone-alt mr-2"></i> Globe: 0956 075 7315
+                    </a>
+                    <a href="mailto:nashmagbanua@gmail.com" class="hover:text-green-300 flex items-center">
+                        <i class="fas fa-envelope mr-2"></i> nashmagbanua@gmail.com
+                    </a>
                 </div>
             </div>
         </div>
+    </footer>
 
-        <hr>
-
-        <div class="info">
-            <p><b>WiFi SSID:</b> 516koniqueTrial</p>
-            <p><b>GCash / Maya:</b> 0956 075 7315</p>
-            <p><b>Location:</b> Blk 5 Lot 16, Highland Residence,<br> San Vicente, Sto. Tomas, Batangas</p>
-            <p><b>Need help?</b> <a href="https://www.facebook.com/share/1Ghw44hCtu/?mibextid=wwXIfr" target="_blank">Message our Facebook Page</a></p>
-
-            <div class="qr-codes-section">
-                <h3>Scan to Pay (GCash & Maya InstaPay)</h3>
-                <div class="qr-codes-container">
-                    <div class="qr-code-item">
-                        <img src="images/gcash.png" alt="GCash InstaPay QR Code">
-                        <p>GCash</p>
-                    </div>
-                    <div class="qr-code-item">
-                        <img src="images/maya.png" alt="Maya InstaPay QR Code">
-                        <p>Maya</p>
-                    </div>
-                </div>
-                <p style="margin-top: 15px; font-size: 14px; color: var(--text-color-medium);">
-                    *Always verify the number <b>0956 075 7315</b> before completing your transaction.
-                </p>
-            </div>
-        </div>
-
-        <hr>
-
-        <footer>
-            &copy; 2025 516Konique | All rights reserved.
-        </footer>
+    <!-- Help Button (Fixed) -->
+    <div class="fixed bottom-6 right-6">
+        <button class="gradient-bg text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-2xl hover:shadow-xl transition-all">
+            <i class="fas fa-question"></i>
+        </button>
     </div>
-
-    <div id="helpModal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <span class="close-button" id="closeModal">&times;</span>
-            <h2>Need Help?</h2>
-            <p>For assistance, please contact us:</p>
-            <p><i class="fas fa-mobile-alt"></i> <strong>Globe:</strong> <a href="tel:+639560757315">0956 075 7315</a></p>
-            <p><i class="fas fa-envelope"></i> <strong>Email:</strong> <a href="mailto:nashmagbanua@gmail.com">nashmagbanua@gmail.com</a></p>
-        </div>
-    </div>
-
-    <script>
-        // Disable right-click for desktop users
-        document.addEventListener('contextmenu', event => event.preventDefault());
-
-        // Get the modal and the help icon/close button
-        const helpModal = document.getElementById('helpModal');
-        const helpIcon = document.getElementById('helpIcon');
-        const closeModal = document.getElementById('closeModal');
-
-        // When the user clicks the help icon, open the modal
-        helpIcon.onclick = function() {
-            helpModal.style.display = "flex"; // Use flex to center content
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        closeModal.onclick = function() {
-            helpModal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal content, close it
-        window.onclick = function(event) {
-            if (event.target == helpModal) {
-                helpModal.style.display = "none";
-            }
-        }
-    </script>
-
 </body>
 </html>
